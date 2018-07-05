@@ -4,19 +4,26 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent
 import com.google.android.exoplayer2.DefaultRenderersFactory
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
 class MainActivity : AppCompatActivity() {
 
-    // Declare instance of Exoplayer
+    /* Member Variables */
+    // Instance of Exoplayer
     private lateinit var exoPlayer: SimpleExoPlayer
+
+    // Instance of SimpleExoPlayerView
+    lateinit var simpleExoPlayerView: SimpleExoPlayerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +61,21 @@ class MainActivity : AppCompatActivity() {
         // Preparing Exoplayer
         exoPlayer.prepare(mediaSource)
         exoPlayer.playWhenReady = true
+
+        // Initialize the View
+        simpleExoPlayerView = findViewById(R.id.player_view) as SimpleExoPlayerView
+
+        // Pass in Exoplayer > So we can respond to events & control the player
+        simpleExoPlayerView.player = exoPlayer
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+
+        // Show Playback controls > controls on any key event
+        simpleExoPlayerView.showController()
+
+        // If event was not handled, check whether the player view can handle it as a media key event.
+        return super.dispatchKeyEvent(event) || simpleExoPlayerView.dispatchMediaKeyEvent(event)
     }
 
     // Release Exoplayer when you are done with it to release system resources
