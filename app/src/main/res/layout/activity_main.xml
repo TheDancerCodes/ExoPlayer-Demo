@@ -3,12 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <!--Add SimpleExoPlayerView-->
+    <!--controller_layout_id > Instructs SimpleExoPlayer where to load its controls from.-->
+    <!--player_layout_id > Instructs SimpleExoPlayer to load the player view from the specified file.-->
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/player_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:controller_layout_id="@layout/audio_playback_control_view"
+        app:player_layout_id="@layout/audio_player_view"/>
 
 </android.support.constraint.ConstraintLayout>
