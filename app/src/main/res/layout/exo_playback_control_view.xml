@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Simple UI to demo that you can get rid of controls completely and use a custom implementation-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/exo_play"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="#CC000000"
+        style="@style/ExoMediaButton.Play"/>
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/exo_pause"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="#CC000000"-->
+        <!--style="@style/ExoMediaButton.Pause"/>-->
+
+    <TextView
+        android:id="@+id/exo_pause"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="#CC000000"
+        android:text="PAUSE"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center" />
+
+</FrameLayout>
