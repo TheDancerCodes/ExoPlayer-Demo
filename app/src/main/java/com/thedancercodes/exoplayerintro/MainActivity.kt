@@ -22,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     // Instance of Exoplayer
     private lateinit var exoPlayer: SimpleExoPlayer
 
+    // Instance of EventLogger
+    private lateinit var eventLogger: EventLogger
+
     // Instance of SimpleExoPlayerView
     lateinit var simpleExoPlayerView: SimpleExoPlayerView
 
@@ -41,11 +44,18 @@ class MainActivity : AppCompatActivity() {
         // Provides logic for selecting a track to give to the renderer
         val trackSelector = DefaultTrackSelector()
 
-        // Instantiate ExoPlayer
+        // Initialize ExoPlayer
         exoPlayer = ExoPlayerFactory.newSimpleInstance(
                 renderersFactory,
                 trackSelector
         )
+
+        // Initialize EventLogger
+        eventLogger = EventLogger(trackSelector)
+        exoPlayer.addListener(eventLogger)
+        exoPlayer.setAudioDebugListener(eventLogger)
+        exoPlayer.setMetadataOutput(eventLogger)
+
 
         // Pass in a Media Source;
         // Use an ExtractorMediaSource as we are playing a mp3 file stored in the assets folder
